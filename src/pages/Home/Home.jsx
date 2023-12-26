@@ -109,39 +109,24 @@ function Home() {
                         </button>
                     </form>
 
-                    <div className="taskListContainer">
-                        <div className="taskList">
-                            <table className="custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Título</th>
-                                        <th>Concluído</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {todoItems.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.title}</td>
-                                            <td>{item.isComplete ? "Sim" : "Não"}</td>
-                                            <td>
-                                                <button onClick={() => handleDeleteItem(item.id)}>
-                                                    Excluir
-                                                </button>
-                                                <button onClick={() => handleToggleComplete(item.id)}>
-                                                    {item.isComplete ? "Não Concluído" : "Concluído"}
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div id="checklist">
+                        <h1>Lista de Tarefas</h1>
+                        {todoItems.map((item) => (
+                            <div key={item.id} className="checklist-item">
+                                <input
+                                    type="checkbox"
+                                    id={`item-${item.id}`}
+                                    name={`item-${item.id}`}
+                                    checked={item.isComplete}
+                                    onChange={() => handleToggleComplete(item.id)}
+                                />
+                                <label htmlFor={`item-${item.id}`} onClick={() => handleToggleComplete(item.id)}>
+                                    {item.title} - {item.isComplete ? "Concluída" : "Pendente"}
+                                </label>
+                            </div>
+                        ))}
                     </div>
                 </div>
-
             </section>
         </>
     );
